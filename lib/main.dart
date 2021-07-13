@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mhs_client/common_widget/MyDrawer.dart';
 
 void main() {
   runApp(TabBarDemo());
@@ -15,7 +17,13 @@ class TabBarDemo extends StatefulWidget{
 }
  class _MyScreen extends State<TabBarDemo> {
 
+
+   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
    int _itemCount = 0;
+   String _value = "";
+   String _listvaluedot="";
+
+
    @override
    Widget build(BuildContext context) {
 
@@ -25,6 +33,7 @@ class TabBarDemo extends StatefulWidget{
        home: DefaultTabController(
          length: 2,
          child: Scaffold(
+           key: _scaffoldKey,
            appBar: AppBar(
              backgroundColor: Colors.white,
              //brightness: Brightness.dark,
@@ -52,9 +61,46 @@ class TabBarDemo extends StatefulWidget{
                  color: Colors.black),),),
              leading: IconButton(icon: Icon(
                Icons.menu, color: Colors.black,
-               size: 30,),),
+               size: 30,),onPressed: (){
+               _scaffoldKey.currentState.openDrawer();
+             }, ),
              actions: <Widget>[
-               IconButton(
+
+
+               PopupMenuButton(
+                 icon:Icon(
+             Icons.add,
+             size: 30,
+             color: Colors.black,
+           ),
+
+                   onSelected: (value) {
+                     setState(() {
+                       _value = value;
+                     });
+                   },
+                   itemBuilder: (context) => [
+                     PopupMenuItem(
+                       child: Text("Camera",style: GoogleFonts.monda(color: Colors.black,fontWeight: FontWeight.normal),),
+                       value: "Camera",
+                     ),
+                     PopupMenuItem(
+                       child: Text("Gallery Import",style: GoogleFonts.monda(color: Colors.black,fontWeight: FontWeight.normal),),
+                       value: "Gallery Import",
+                     ),
+
+                     PopupMenuItem(
+                       child: Text("Dropbox Import",style: GoogleFonts.monda(color: Colors.black,fontWeight: FontWeight.normal),),
+                       value: "Dropbox Import",
+                     ),
+                     PopupMenuItem(
+                       child: Text("Google Drive Import",style: GoogleFonts.monda(color:
+                       Colors.black,fontWeight: FontWeight.normal),),
+                       value: "Google",
+                     )
+                   ]
+               )
+               /*IconButton(
                  icon: Icon(
                    Icons.add,
                    size: 30,
@@ -63,11 +109,13 @@ class TabBarDemo extends StatefulWidget{
                  onPressed: () {
                    // do something
                  },
-               )
+               )*/
              ],
 
 
            ),
+
+           drawer: MyDrawer(),
            bottomNavigationBar: Container(
              decoration: BoxDecoration(color: Colors.white,
                  border: Border.all(width: 1.0, color: Colors.black26)),
@@ -75,8 +123,21 @@ class TabBarDemo extends StatefulWidget{
              height: 80, child: Row(
              mainAxisAlignment: MainAxisAlignment.spaceAround,
              children: [
-               Row(children: [ Icon(Icons.new_releases_outlined),
-                 Text("  Total:", style: TextStyle(color: Colors.black45),),
+               Row(children: [
+
+                 //Icon(Icons.info,size: 45,color: Colors.black45,),
+                 MaterialButton(
+                   elevation: 0.2,
+                   shape: CircleBorder(),
+                   color: Colors.white70,
+                   padding: EdgeInsets.all(8),
+                   onPressed: () {},
+                   child: Text("i",
+                     style:GoogleFonts.oswald(fontWeight:FontWeight.bold,
+                         fontSize:25,fontStyle: FontStyle.normal,color: Colors.black),
+                 ),),
+
+                 Text("    Total:", style: TextStyle(color: Colors.black87),),
 
                ],),
                Text("Rm 5290", style: TextStyle(
@@ -87,7 +148,7 @@ class TabBarDemo extends StatefulWidget{
                  child: TextButton(
 
                      child: Text(
-                         "Buy",
+                         "Rm 291.00",
                          style: TextStyle(fontSize: 14, color: Colors.white)
                      ),
                      style: ButtonStyle(
@@ -162,14 +223,50 @@ class TabBarDemo extends StatefulWidget{
 
 
 
-                     Row(
+                    Expanded(child:  Row(
 
                        children: [
                        Expanded(flex:8,child: Text("Black Grapes",style:
                        TextStyle(fontSize:13,color: Colors.black,fontWeight: FontWeight.bold),),),
-                 Flexible(child: Icon(Icons.more_vert,
-                   color: Colors.black26,))
-                     ],),
+                 Flexible(
+                      flex: 2,
+                     fit: FlexFit.loose,
+                     child:
+                 PopupMenuButton(
+                     icon:Icon(Icons.more_vert,
+                       color: Colors.black26,),
+
+                     onSelected: (value) {
+                       setState(() {
+                         _listvaluedot = value;
+                       });
+                     },
+                     itemBuilder: (context) => [
+                       PopupMenuItem(
+                         child: Text("Save Favorite",style: GoogleFonts.monda(color: Colors.black,fontWeight: FontWeight.normal),),
+                         value: "Save",
+                       ),
+                       PopupMenuItem(
+                         child: Text("Category",style: GoogleFonts.monda(color: Colors.black,fontWeight: FontWeight.normal),),
+                         value: "Category",
+                       ),
+
+                       PopupMenuItem(
+                         child: Text("Export pdf",style: GoogleFonts.monda(color: Colors.black,fontWeight: FontWeight.normal),),
+                         value: "pdf",
+                       ),
+                       PopupMenuItem(
+                         child: Text("Remove",style: GoogleFonts.monda(color: Colors.redAccent,fontWeight: FontWeight.normal),),
+                         value: "Remove",
+                       )
+                     ]
+                 )
+                /* Icon(Icons.more_vert,
+                   color: Colors.black26,)*/
+
+
+                 )
+                     ],),),
                  Text("20 Kg",style:  TextStyle(fontSize:12,color: Colors.black,fontWeight: FontWeight.bold),),
                  Container(
                    margin: EdgeInsets.only(bottom: 6),
