@@ -7,9 +7,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mhs_client/common_widget/MyDrawer.dart';
+import 'package:mhs_client/ui/login.dart';
+import 'package:mhs_client/ui/regisster.dart';
 
 void main() {
-  runApp(TabBarDemo());
+  //runApp(TabBarDemo());
+  //runApp(MyLogin());
+  runApp(MaterialApp(
+   // theme: ThemeData(fontFamily: 'bree'),
+    color: Colors.white,
+    title: '',
+    initialRoute: '/',
+    routes: {
+      // When navigating to the "/" route, build the FirstScreen widget.
+      '/': (context) => MyLogin(),
+      '/tabbar':(context)=>TabBarDemo(),
+      '/signup':(context)=>Register(),
+
+
+
+      // '/statrept': (context) => StatsticsReport(),
+      //'/storelogin': (context) => StoreLogin(),
+      // When navigating to the "/second" route, build the SecondScreen widget.
+      // '/second': (context) => SecondScreen(),
+    },
+    //home: MyHomePage(title: 'Flutter Demo Home Page'),
+  ));
 }
 
 class TabBarDemo extends StatefulWidget{
@@ -62,7 +85,7 @@ class TabBarDemo extends StatefulWidget{
              leading: IconButton(icon: Icon(
                Icons.menu, color: Colors.black,
                size: 30,),onPressed: (){
-               _scaffoldKey.currentState.openDrawer();
+               _scaffoldKey.currentState!.openDrawer();
              }, ),
              actions: <Widget>[
 
@@ -76,7 +99,7 @@ class TabBarDemo extends StatefulWidget{
 
                    onSelected: (value) {
                      setState(() {
-                       _value = value;
+                       _value = value.toString();
                      });
                    },
                    itemBuilder: (context) => [
@@ -238,7 +261,7 @@ class TabBarDemo extends StatefulWidget{
 
                      onSelected: (value) {
                        setState(() {
-                         _listvaluedot = value;
+                         _listvaluedot = value.toString();
                        });
                      },
                      itemBuilder: (context) => [
