@@ -160,21 +160,51 @@ class TabBarDemo extends StatefulWidget{
                          fontSize:25,fontStyle: FontStyle.normal,color: Colors.black),
                  ),),
 
-                 Text("    Total:", style: TextStyle(color: Colors.black87),),
+                // Text("    Total:", style: TextStyle(color: Colors.black87),),
 
                ],),
-               Text("Rm 5290", style: TextStyle(
+              Container(
+
+                margin: EdgeInsets.only(top: 18),
+                child:Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                Text("Desire",style:GoogleFonts.oswald(fontWeight:FontWeight.bold,
+                    fontSize:15,fontStyle: FontStyle.normal,color: Colors.black45),),
+
+                Text("Rm 5290", style: TextStyle(
                    color: Colors.black, fontWeight: FontWeight.bold),),
+
+              ],),),
                Container(width: 130,
                  height: 45,
 
-                 child: TextButton(
-
-                     child: Text(
-                         "Rm 291.00",
-                         style: TextStyle(fontSize: 14, color: Colors.white)
+                 child: Container(
+                     decoration: BoxDecoration(
+                       color: Color(0xffff3160),
+                         border: Border.all(
+                           color: Color(0xffff3160),
+                         ),
+                         borderRadius: BorderRadius.all(Radius.circular(20))
                      ),
-                     style: ButtonStyle(
+                     child:
+                     Center(child:Text.rich(
+                         TextSpan(
+                             text: '     My Cart \n',
+                             style: TextStyle(color: Colors.white,fontSize: 15),
+                             children: <InlineSpan>[
+                               TextSpan(
+                                 text: 'Rm 291.00',
+                                 style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal,color: Colors.white),
+                               )
+                             ]
+                         )
+                     ),),
+                     /*Text(
+                         "My Cart\n Rm 291.00",
+                         style: TextStyle(fontSize: 14, color: Colors.white)
+                     ),*/
+                     /*style: ButtonStyle(
                          padding: MaterialStateProperty.all<EdgeInsets>(
                              EdgeInsets.all(15)),
                          foregroundColor: MaterialStateProperty.all<Color>(
@@ -188,8 +218,8 @@ class TabBarDemo extends StatefulWidget{
                                  side: BorderSide(color: Color(0xffff3160))
                              )
                          )
-                     ),
-                     onPressed: () => null
+                     ),*/
+                     //onPressed: () => null
                  ),),
 
 
@@ -290,7 +320,15 @@ class TabBarDemo extends StatefulWidget{
 
                  )
                      ],),),
-                 Text("20 Kg",style:  TextStyle(fontSize:12,color: Colors.black,fontWeight: FontWeight.bold),),
+                 Row(children: [
+                   Text("20 Kg",style:  TextStyle(fontSize:12,color:
+                 Colors.black,fontWeight: FontWeight.bold),),
+
+                   Container(margin: EdgeInsets.only(left: 30),child:
+                   Text("RM 353.34",style:  TextStyle(fontSize:12,color:
+                   Colors.green,fontWeight: FontWeight.bold),),)
+
+                 ],),
                  Container(
                    margin: EdgeInsets.only(bottom: 6),
                    child:Row(
